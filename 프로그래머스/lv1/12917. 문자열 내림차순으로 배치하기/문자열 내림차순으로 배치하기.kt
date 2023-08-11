@@ -1,3 +1,3 @@
 class Solution {
-    fun solution(s: String) = s.toCharArray().sortedDescending().joinToString("")
+    fun solution(s: String) = String(s.toCharArray().sortedArrayDescending())
 }
