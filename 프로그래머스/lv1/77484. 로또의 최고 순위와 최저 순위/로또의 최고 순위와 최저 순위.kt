@@ -1,6 +1,5 @@
 class Solution {
     fun solution(lottos: IntArray, win_nums: IntArray): IntArray {
-        // var answer: IntArray = intArrayOf()
         val zero_count = lottos.filter { it == 0 }.count()
         val same_count = lottos.filter { win_nums.contains(it) }.count()
   
