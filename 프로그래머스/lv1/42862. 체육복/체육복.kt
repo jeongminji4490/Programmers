@@ -1,34 +1,24 @@
 class Solution {
     fun solution(n: Int, lost: IntArray, reserve: IntArray): Int {
         var answer = 0
-
-        lost.sort()
-        reserve.sort()
         
-        var lostList = lost.toMutableList()
-        var reserveList = reserve.toMutableList()
+        var _lost = lost.filter { !reserve.contains(it) }.toMutableList() 
+        var _reserve = reserve.filter { !lost.contains(it) }.toMutableList() 
         
-        var removed = mutableListOf<Int>()
+        _lost.sort()
+        _reserve.sort()
         
-        lostList.forEach {
-            if(reserveList.contains(it)) {
-                removed.add(it)
-            }
-        }
-        
-        lostList.removeAll(removed)
-        reserveList.removeAll(removed)
-
-        for(i in lostList.indices) {
-            for(j in reserveList.indices) {
-                if(reserveList[j] == lostList[i] + 1 || reserveList[j] == lostList[i] - 1) {
-                    reserveList.removeAt(j) 
-                    ++ answer
+        for (i in _lost.indices) { 
+            for (j in _reserve.indices) {
+                if (_reserve[j] == _lost[i]-1 || _reserve[j] == _lost[i]+1) {
+                    ++answer
+                    _reserve.removeAt(j) 
                     break
                 }
             }
         }
-
-        return n - (lostList.size - answer) 
+        
+        return n - (_lost.size - answer)
+        
     }
 }
